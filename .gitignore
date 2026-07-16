@@ -1,0 +1,15 @@
+*.env
+!.env.example
+.venv/
+venv/
+backend/.venv/
+__pycache__/
+*.pyc
+frontend/node_modules/
+frontend/dist/
+.pytest_cache/
+.DS_Store
+.env.example
+spec.md
+Project_Overview.md
+advanced_spec.md
