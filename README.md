@@ -4,6 +4,12 @@ AI SkillBridge is an AI-powered career readiness platform for students and early
 
 The private Career Workspace includes saved reports, job-description matching, cover letters, a four-week learning roadmap, interview preparation, PDF exports, and a context-aware Career Coach.
 
+## Live Demo
+
+Try the deployed application:
+
+**[Open AI SkillBridge](https://career-pilot-ai-opal.vercel.app/)**
+
 ## Features
 
 ### Resume Intelligence
