@@ -25,7 +25,7 @@ from .storage import build_store, serialize_report
 settings = get_settings()
 logging.basicConfig(level=settings.log_level)
 logger = logging.getLogger(__name__)
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login", auto_error=False)
 
 
 @asynccontextmanager
@@ -71,10 +71,12 @@ def _user_response(user: dict) -> UserResponse:
     return UserResponse(id=str(user["_id"]), full_name=user["full_name"], email=user["email"], created_at=str(created_at))
 
 
-async def get_current_user(request: Request, token: str = Depends(oauth2_scheme)) -> dict:
+async def get_current_user(request: Request, token: str | None = Depends(oauth2_scheme)) -> dict:
     try:
-        user_id = decode_access_token(token, settings)
-        user = await request.app.state.store.get_user(user_id)
+        user = None
+        if token:
+            user_id = decode_access_token(token, settings)
+            user = await request.app.state.store.get_user(user_id)
     except (jwt.InvalidTokenError, KeyError):
         user = None
     if user is None:
