@@ -17,7 +17,10 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - run: python -m compileall -q app
-      - run: pytest -q
+      - name: Run backend tests
+        run: python -m pytest -q
+        env:
+          PYTHONPATH: .
 
   frontend:
     runs-on: ubuntu-latest
